@@ -104,13 +104,13 @@
                     <span>Tables</span></a>
             </li>
 
-            {{-- <!--Category-->
+            <!--Brand-->
             <li class="nav-item active">
-                <a class="nav-link" href="{{ route('categories.index')}}">
+                <a class="nav-link" href="{{ route('brands.index')}}">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Category</span></a>
+                    <span>Brand</span></a>
             </li>
-
+ {{--
              <!--Student-->
             <li class="nav-item active">
                 <a class="nav-link" href="{{ route('students.index')}}">

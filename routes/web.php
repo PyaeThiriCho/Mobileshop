@@ -18,6 +18,6 @@ use App\Http\Controllers\BrandController;
 //     return view('welcome');
 // });
 
-Route::get('/table',[App\Http\Controllers\BackendTemplateController::class, 'tablefun'])->name('table');
+Route::get('/',[App\Http\Controllers\BackendTemplateController::class, 'tablefun'])->name('table');
 
 Route::resource('brands',BrandController::class);

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Brand;
 class BrandController extends Controller
 {
     /**
@@ -11,7 +11,8 @@ class BrandController extends Controller
      */
     public function index()
     {
-        //
+        $brands =Brand::all();
+        return view('backend.brand.list',compact('brands'));
     }
 
     /**
@@ -19,7 +20,7 @@ class BrandController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.brand.create');
     }
 
     /**
@@ -27,7 +28,18 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'brandName' => 'required|min:3',
+        ]);
+
+        $brandName = $request->brandName;
+
+        $brand = new Brand();
+        $brand->name =$request->brandName;
+        $brand->save();
+
+        return redirect()->route('brands.index')->with('success', 'Brand created successfully.');
+        
     }
 
     /**
@@ -35,7 +47,7 @@ class BrandController extends Controller
      */
     public function show(string $id)
     {
-        //
+
     }
 
     /**
@@ -43,7 +55,9 @@ class BrandController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $brand =Brand::find($id);
+         return view('backend.brand.edit',compact('brand'));
+
     }
 
     /**
@@ -51,7 +65,15 @@ class BrandController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'brandName' => 'required|min:3',
+        ]);
+        
+        $brand = Brand::find($id);
+        $brand->name =$request->brandName;
+        $brand->save();
+
+        return redirect()->route('brands.index')->with('success', 'Brand updated successfully.');
     }
 
     /**
@@ -59,6 +81,8 @@ class BrandController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $brand =Brand::find($id);
+        $brand->delete();
+        return redirect()->route('brands.index');
     }
 }
